@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Architectural Deep Dive: Little Saint James Temple, Aman, Legorreta, and Mamluk Spatial Logic</title>
+  <style>
+    :root {
+      --bg: #0f1115;
+      --panel: #171a21;
+      --panel-2: #1f2430;
+      --text: #ece7dd;
+      --muted: #b8b2a7;
+      --accent: #8fb3d9;
+      --accent-2: #d8b26e;
+      --line: rgba(255,255,255,0.08);
+      --max: 1120px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Georgia, "Times New Roman", serif;
+      background: linear-gradient(180deg, #0d1016 0%, #12161f 100%);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    a { color: var(--accent); }
+    a:hover { color: #b9d3ef; }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 40px 20px 80px;
+    }
+    header {
+      border: 1px solid var(--line);
+      background: radial-gradient(circle at top left, rgba(143,179,217,0.15), transparent 35%), var(--panel);
+      border-radius: 24px;
+      padding: 36px 28px;
+      margin-bottom: 28px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+    }
+    h1, h2, h3 {
+      line-height: 1.2;
+      margin: 0 0 12px;
+      font-weight: 600;
+    }
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      max-width: 14ch;
+    }
+    h2 {
+      font-size: clamp(1.45rem, 2vw, 2rem);
+      margin-top: 10px;
+    }
+    h3 {
+      font-size: 1.15rem;
+      color: var(--accent-2);
+      margin-top: 18px;
+    }
+    .dek {
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: 1.05rem;
+    }
+    .note {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-left: 3px solid var(--accent-2);
+      background: rgba(216,178,110,0.08);
+      color: #e6dccb;
+    }
+    section {
+      margin: 28px 0;
+      border: 1px solid var(--line);
+      background: var(--panel);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.18);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin: 20px 0 10px;
+    }
+    figure {
+      margin: 0;
+      background: var(--panel-2);
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+      background: #0b0d12;
+    }
+    figcaption {
+      padding: 10px 12px 14px;
+      font-size: 0.94rem;
+      color: var(--muted);
+    }
+    ul {
+      margin: 12px 0 0 0;
+      padding-left: 20px;
+    }
+    li { margin-bottom: 8px; }
+    .split {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 24px;
+    }
+    .card {
+      background: var(--panel-2);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+    }
+    .quote {
+      font-style: italic;
+      font-size: 1.12rem;
+      padding: 18px 20px;
+      background: rgba(143,179,217,0.08);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 16px 16px 0;
+      margin: 18px 0;
+    }
+    .small {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    .links a {
+      display: inline-block;
+      margin: 6px 12px 0 0;
+    }
+    footer {
+      margin-top: 32px;
+      color: var(--muted);
+      font-size: 0.92rem;
+      text-align: center;
+    }
+    @media (max-width: 780px) {
+      .split { grid-template-columns: 1fr; }
+      section, header { padding: 22px; }
+      img { height: 220px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <p class="small">Architectural thread package</p>
+      <h1>Little Saint James Temple, Aman, Legorreta, and Islamic Spatial Logic</h1>
+      <p class="dek">A structured HTML page packaging the architecture thread: the observed temple-like structure on Little Saint James, stylistic overlap with Ed Tuttle’s Aman language and Ricardo Legorreta’s geometry, plus the narrower question of which architects in Epstein’s broader orbit show meaningful connection to Islamic architectural principles.</p>
+      <div class="note"><strong>Note:</strong> This page presents architectural reading and comparison. The temple structure on Little Saint James is discussed as <em>observed, not officially attributed</em>. No direct architect attribution for that building is claimed here.</div>
+    </header>
+
+    <section>
+      <h2>The Temple on Little Saint James</h2>
+      <p><em>As observed, not officially attributed.</em></p>
+      <div class="grid">
+        <figure>
+          <a href="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w%2Cf_auto%2Cq_auto%3Abest/newscms/2019_31/2951141/190729-jeffrey-epstein-island-drone-temple-ew-505p.jpg" target="_blank" rel="noopener noreferrer"><img src="https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1500w%2Cf_auto%2Cq_auto%3Abest/newscms/2019_31/2951141/190729-jeffrey-epstein-island-drone-temple-ew-505p.jpg" alt="Little Saint James temple-like structure aerial view" /></a>
+          <figcaption>Temple-like structure on Little Saint James. Click image to open source.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_31/2951141/190729-jeffrey-epstein-island-drone-temple-ew-505p.jpg" target="_blank" rel="noopener noreferrer"><img src="https://media-cldnry.s-nbcnews.com/image/upload/newscms/2019_31/2951141/190729-jeffrey-epstein-island-drone-temple-ew-505p.jpg" alt="Little Saint James temple-like structure drone image" /></a>
+          <figcaption>Second image view of the structure. Click image to open source.</figcaption>
+        </figure>
+      </div>
+      <div class="split">
+        <div>
+          <h3>Key traits</h3>
+          <ul>
+            <li>Blue-and-white striped façade</li>
+            <li>Central dome</li>
+            <li>Symmetrical, axial approach</li>
+            <li>Elevated platform with a slight separation from the ground plane</li>
+            <li>Minimal windows and opaque surfaces</li>
+            <li>Stage-like presentation</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Impression</h3>
+          <p>Not a residence. Not a resort. It reads as <strong>symbolic architecture</strong>—something meant to be seen, approached, and interpreted.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Ed Tuttle / Aman Language</h2>
+      <div class="grid">
+        <figure>
+          <a href="https://www.foratravel.com/_next/image?q=50&url=https%3A%2F%2Fmedia.foratravel.com%2Fimage%2Fupload%2Fv1730828890%2Fcontentful-migration%2FcomponentImage%2Ffile%2Fn0mhrh1g4b0evv3vhxex.jpg&w=2048" target="_blank" rel="noopener noreferrer"><img src="https://www.foratravel.com/_next/image?q=50&url=https%3A%2F%2Fmedia.foratravel.com%2Fimage%2Fupload%2Fv1730828890%2Fcontentful-migration%2FcomponentImage%2Ffile%2Fn0mhrh1g4b0evv3vhxex.jpg&w=2048" alt="Aman resort example showing axial water and minimal geometry" /></a>
+          <figcaption>Aman visual language: minimal geometry, controlled approach.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://media.architecturaldigest.com/photos/5bbcbf11cf791c2db61a49cb/4%3A3/w_5120%2Ch_3840%2Cc_limit/Amanera%2C-Dominican-Rep2-bed-Casa_Original_8156.jpg" target="_blank" rel="noopener noreferrer"><img src="https://media.architecturaldigest.com/photos/5bbcbf11cf791c2db61a49cb/4%3A3/w_5120%2Ch_3840%2Cc_limit/Amanera%2C-Dominican-Rep2-bed-Casa_Original_8156.jpg" alt="Amanera architecture example" /></a>
+          <figcaption>Controlled sightlines and privacy in luxury resort design.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://static.dezeen.com/uploads/2026/03/amangiri-six-bed-villa_masastudio_dezeen_sq3-852x852.jpg" target="_blank" rel="noopener noreferrer"><img src="https://static.dezeen.com/uploads/2026/03/amangiri-six-bed-villa_masastudio_dezeen_sq3-852x852.jpg" alt="Amangiri villa architecture" /></a>
+          <figcaption>Thresholds, enclosure, withdrawal.</figcaption>
+        </figure>
+      </div>
+      <div class="split">
+        <div>
+          <h3>Core design principles</h3>
+          <ul>
+            <li>Radical minimalism</li>
+            <li>Controlled sightlines</li>
+            <li>Thresholds: gates, courtyards, transitions</li>
+            <li>Water and reflection as spatial stabilizers</li>
+            <li>Privacy and withdrawal</li>
+          </ul>
+        </div>
+        <div>
+          <div class="card">
+            <h3>Overlap with the temple</h3>
+            <ul>
+              <li>Strong axial symmetry</li>
+              <li>Approach to arrival as an experience</li>
+              <li>Separation from surroundings</li>
+              <li>Controlled visibility: the interior is withheld</li>
+            </ul>
+          </div>
+          <div class="card" style="margin-top:16px;">
+            <h3>Key difference</h3>
+            <p>Aman dissolves into landscape. The temple <strong>announces itself</strong>.</p>
+            <p><strong>Aman</strong> = invisible luxury<br /><strong>Temple</strong> = symbolic object</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Ricardo Legorreta Geometry</h2>
+      <div class="grid">
+        <figure>
+          <a href="https://media.architecturaldigest.com/photos/55e7635a302ba71f30163a7b/1%3A1/w_440%2Ch_440%2Cc_limit/dam-images-decor-ricardo-legorreta-architect-ricardo-legorreta-v440.jpg" target="_blank" rel="noopener noreferrer"><img src="https://media.architecturaldigest.com/photos/55e7635a302ba71f30163a7b/1%3A1/w_440%2Ch_440%2Cc_limit/dam-images-decor-ricardo-legorreta-architect-ricardo-legorreta-v440.jpg" alt="Ricardo Legorreta portrait or building image" /></a>
+          <figcaption>Legorreta reference image.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://image-tc.galaxy.tf/wijpeg-b6sejzmbiwrup7bg9op3a0h7u/fachada-2-1.jpg?width=2560" target="_blank" rel="noopener noreferrer"><img src="https://image-tc.galaxy.tf/wijpeg-b6sejzmbiwrup7bg9op3a0h7u/fachada-2-1.jpg?width=2560" alt="Legorreta building facade" /></a>
+          <figcaption>Bold planes, saturated color, monumental simplicity.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://www.legorreta.mx/fotos/proyecto_foto/878260421085933.jpg" target="_blank" rel="noopener noreferrer"><img src="https://www.legorreta.mx/fotos/proyecto_foto/878260421085933.jpg" alt="Legorreta courtyard or spatial composition" /></a>
+          <figcaption>Geometric massing and controlled openness.</figcaption>
+        </figure>
+      </div>
+      <div class="split">
+        <div>
+          <h3>Core traits</h3>
+          <ul>
+            <li>Bold, often sacred-feeling color blocking</li>
+            <li>Heavy geometric massing</li>
+            <li>Minimal openings that intensify interior mystery</li>
+            <li>Light used as a spiritual material</li>
+            <li>Buildings that feel temple-adjacent even when secular</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Overlap with the temple</h3>
+          <ul>
+            <li>Color as identity</li>
+            <li>Monumental simplicity</li>
+            <li>Limited transparency</li>
+            <li>A strong sense of “this is a place apart”</li>
+          </ul>
+          <p><strong>Difference:</strong> Legorreta is grounded and earthbound; the temple reads as almost graphic, like a symbol placed onto the land.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Where the Three Converge</h2>
+      <div class="split">
+        <div class="card">
+          <h3>1. Separation from the ordinary world</h3>
+          <p>Aman creates retreat. Legorreta creates enclosure. The temple stands as an isolated object on a private island. All three establish a boundary condition.</p>
+        </div>
+        <div class="card">
+          <h3>2. Control of perception</h3>
+          <p>Aman curates what you see. Legorreta uses light and shadow to conceal and reveal. The temple presents an exterior while withholding its interior.</p>
+        </div>
+        <div class="card">
+          <h3>3. Ritualized movement</h3>
+          <p>Thresholds, courtyards, frontal approaches, and central axes turn movement into something ceremonial rather than casual.</p>
+        </div>
+        <div class="card">
+          <h3>4. Opacity</h3>
+          <p>Very few windows. Restricted interior legibility. The result suggests privacy, exclusivity, or restriction.</p>
+        </div>
+      </div>
+      <div class="quote">The temple feels like a collision: Aman’s controlled experience, Legorreta’s monumental geometry, and something more theatrical, almost set-like. It is closer to a symbol than a lived architectural environment.</div>
+    </section>
+
+    <section>
+      <h2>The Dark Folio Read</h2>
+      <div class="quote">
+        Aman architecture removes you from the world.<br />
+        Legorreta architecture reorders your relationship to space and light.<br />
+        The temple does neither fully.<br />
+        It <strong>presents itself as a sign</strong>.
+      </div>
+      <p>Not a place to live. Not a place to rest. A place to mean something.</p>
+      <p>That reframes the question. Instead of asking <em>Who designed it?</em>, the more revealing question becomes: <em>What language is it speaking, and why is that language assembled this way?</em></p>
+    </section>
+
+    <section>
+      <h2>Which Architects in the Broader List Show Connection to Islamic Architecture?</h2>
+      <p>None of the architects discussed here are “Islamic architects” in the strict religious or historical sense. But some work within a design language that parallels key principles refined in Islamic architecture and later absorbed into global luxury design.</p>
+      <div class="grid">
+        <figure>
+          <a href="https://www.travelandleisure.com/thmb/0mPVeC2Xiel6RWMUU9GmHAFWYAY%3D/1500x0/filters%3Ano_upscale%28%29%3Amax_bytes%28150000%29%3Astrip_icc%28%29/TAL-header-watergardens-chedi-muscat-oman-CHEDIMUSCAT1224-dde57813e1ff4bbf88711277aefdc797.jpg" target="_blank" rel="noopener noreferrer"><img src="https://www.travelandleisure.com/thmb/0mPVeC2Xiel6RWMUU9GmHAFWYAY%3D/1500x0/filters%3Ano_upscale%28%29%3Amax_bytes%28150000%29%3Astrip_icc%28%29/TAL-header-watergardens-chedi-muscat-oman-CHEDIMUSCAT1224-dde57813e1ff4bbf88711277aefdc797.jpg" alt="The Chedi Muscat water gardens" /></a>
+          <figcaption>Jean-Michel Gathy: The Chedi Muscat and the garden-paradise logic.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://images.squarespace-cdn.com/content/v1/671784f3dc5ab92560a87cdb/1759078989597-K48BEO5AJXEUB6QCAP5P/Amanjena%2C%2BMorocco%2B-%2BResort%2C%2BMain%2BPool%2B%281%29%2Bcopy.jpg" target="_blank" rel="noopener noreferrer"><img src="https://images.squarespace-cdn.com/content/v1/671784f3dc5ab92560a87cdb/1759078989597-K48BEO5AJXEUB6QCAP5P/Amanjena%2C%2BMorocco%2B-%2BResort%2C%2BMain%2BPool%2B%281%29%2Bcopy.jpg" alt="Amanjena main pool Morocco" /></a>
+          <figcaption>Ed Tuttle: riad logic, inward-facing space, and water as stillness.</figcaption>
+        </figure>
+        <figure>
+          <a href="https://www.iconichouses.org/foto/for-sale/legorreta/1-Legorreta-central-courtyard.jpg" target="_blank" rel="noopener noreferrer"><img src="https://www.iconichouses.org/foto/for-sale/legorreta/1-Legorreta-central-courtyard.jpg" alt="Legorreta central courtyard" /></a>
+          <figcaption>Ricardo Legorreta: a parallel geometry of enclosure, light, and mystery.</figcaption>
+        </figure>
+      </div>
+      <div class="split">
+        <div class="card">
+          <h3>Jean-Michel Gathy</h3>
+          <p><strong>Closest alignment:</strong> Islamic garden and palace logic translated into luxury.</p>
+          <ul>
+            <li><strong>Garden as paradise:</strong> water, symmetry, and enclosure as a microcosm of order</li>
+            <li><strong>Axial movement:</strong> movement is choreographed and staged</li>
+            <li><strong>Interior world:</strong> inwardness over outward display</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Ed Tuttle</h3>
+          <p><strong>Closest alignment:</strong> Moroccan and riad-based spatial philosophy.</p>
+          <ul>
+            <li><strong>Courtyard as heart:</strong> space organized around a quiet center</li>
+            <li><strong>Privacy as structure:</strong> exterior restraint, interior richness</li>
+            <li><strong>Water as stillness:</strong> reflection used to stabilize perception</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top:16px;">
+        <h3>Ricardo Legorreta</h3>
+        <p><strong>Closest alignment:</strong> not direct Islamic influence, but a parallel evolution in spatial logic.</p>
+        <ul>
+          <li><strong>Light as architecture:</strong> light becomes a shaping force</li>
+          <li><strong>Geometry as order:</strong> simple volumes create metaphysical calm</li>
+          <li><strong>Enclosure and mystery:</strong> the building reveals itself gradually</li>
+        </ul>
+      </div>
+      <h3>Shared principles across the short list</h3>
+      <ul>
+        <li>Inwardness over display</li>
+        <li>Controlled revelation</li>
+        <li>Geometry as order</li>
+        <li>Water and stillness</li>
+        <li>Separation between outside chaos and interior order</li>
+      </ul>
+      <p>That is the disciplined conclusion: the temple appears to echo some of the same spatial logic—symmetry, enclosure, symbolic geometry—but in a more overt, declarative form. That suggests not a direct lineage, but a selective appropriation of architectural language.</p>
+    </section>
+
+    <section>
+      <h2>Reference Links</h2>
+      <p class="links">
+        <a href="https://www.archpaper.com/2019/08/eavesdrop-architects-designers-jeffrey-epstein-black-book/" target="_blank" rel="noopener noreferrer">Architect’s Newspaper article</a>
+        <a href="https://www.aman.com/" target="_blank" rel="noopener noreferrer">Aman official site</a>
+        <a href="https://www.legorreta.mx/" target="_blank" rel="noopener noreferrer">Legorreta official site</a>
+      </p>
+    </section>
+
+    <footer>
+      Built as a standalone HTML page for your research thread. Images remain linked to their original web sources.
+    </footer>
+  </div>
+</body>
+</html>
